@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>QuesTi</title>
+
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="wrapper">
+	<div class="">
+		<div class="container-login100 ">
+			<div class=" p-t-90 p-b-30">
+				<form name="form1" METHOD="POST"class="login100-form validate-form" action="/cadastro/editar_senha" enctype="multipart/form-data">
+					<span class="login100-form-title p-b-40">
+						QuestTi
+					</span>
+
+					<form>
+						<div class="form-row">
+								<label for="inputPassword4">senha</label>
+                                <input name="senha" type="password" class="form-control" id="senha1" >
+
+                        </div>
+
+                        <div class="form-row">
+                                <label for="inputPassword4">Confirmar Senha</label>
+                                <input name="senha2" type="password" class="form-control" id="senha2" >
+						<div class="form-group">
+                        </div>
+                        <br><br>
+					<div class="container-login100-form-btn">
+						
+						<button onclick="return verificacampo(this)" class="login100-form-btn">
+							Atualizar
+						</button>
+					</div>
+					
+					<div class="flex-col-c p-t-224">
+
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		function verificacampo(){
+
+		var senha1= document.getElementById('senha1') //id do input nome item
+		var senha2= document.getElementById('senha2')
+		
+
+			if (senha1.value==""||senha2.value=="") {
+				alert("Os 2 campos devem ser preenchidos!");
+				return false;
+
+			}else if(senha1.value!=senha2.value){
+				alert("a senha e confirmação devem ser iguais!");
+				return false;
+			}
+			 else{
+
+				alert("Senha Atualizada!");
+				return true;
+			}
+
+			}
+</script>
+
+
+</body>
+</html>
