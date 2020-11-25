@@ -147,8 +147,8 @@ class chamados extends CI_Controller
         // formatando para inteiro 
 
         $media_int = floor($media_total);
-      }else{
-        $media_int=0;
+      } else {
+        $media_int = 0;
       }
 
 
@@ -522,6 +522,54 @@ class chamados extends CI_Controller
         $novo_status = 3;
         $acao_tb = "Stsavaliado";
         $total = 0;
+
+
+
+        $id = $this->input->get('id');
+        $data = array("id_chamado" => $id);
+
+
+        // consultando o chamado para poder pegar o cpf 
+        // cpf para depositar o valor desejado
+
+        $this->load->model('Chamado');
+        $retorno = $this->Chamado->ChamadoId($data);
+
+
+
+        // e traz a conta do tecnico onde sera depositada
+
+        $data2 = array("cpf_tec" => $retorno[0]['cpf_tecnico']);
+
+
+        //pegando o usuario
+        $this->load->model('Tecnico');
+        $ContaSessaoTec = (array) $this->Tecnico->buscar_cpf($data2, "tecnico");
+
+
+        // pesquisando as logs de avaliacao gravadas  com esse mesmo tecnico selecionado pelo
+        // cliente
+
+
+        $this->load->model('Log');
+        $retorno = $this->Log->PesqAvaliacao($ContaSessaoTec['email'], 11);
+        $contar = $this->Log->CompilaDados($retorno);
+
+
+        $media = 0;
+        $total = 0;
+        foreach ($retorno  as $value) {
+          $total = $value['quantidade'] + $total;
+        }
+
+
+        // calculando a media para atualizar a media do tecnico
+        $media = floor($total / $contar);
+
+        $data3 = array("avaliacao" => $media);
+
+        $pesquisa = $this->Tecnico->UpdateAvaliacao($data3, $ContaSessaoTec['email']);
+        
       } else if ($_GET['status'] == 3) {
 
         $this->load->model('Contac');
@@ -611,7 +659,7 @@ class chamados extends CI_Controller
       exit;
     }
 
-
+    
 
     $data = array(
       "status" => $novo_status,
@@ -672,6 +720,7 @@ class chamados extends CI_Controller
       header("Location: solicitacao_comp?id=" . @$id . "&message=sts_err");
       exit;
     }
+    
   }
 
 

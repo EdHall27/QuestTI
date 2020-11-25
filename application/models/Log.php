@@ -169,4 +169,16 @@ class Log extends CI_Model
 
         return  $query->result_array();
     }
+
+    public function PesqAvaliacao($user, $tipomov)
+    {
+        $table = "logs";
+        $query = $this->db->select("*");
+        $query = $this->db->where('para', $user);
+        $query = $this->db->where('TipoMov', $tipomov);
+        $query = $this->db->get($table);
+
+
+        return  $query->result_array();
+    }
 }
