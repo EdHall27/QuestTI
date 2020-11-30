@@ -41,9 +41,8 @@ class gerencia extends CI_Controller
 
 
 
-
-      $this->load->view('dashboard.php');
       $this->load->view('/template/layout-base.html');
+      $this->load->view('dashboard.php');
       $this->load->view('gerenciar_view', $data);
       $this->load->view('/template/roda-pe-base.html');
     } else {
@@ -75,7 +74,6 @@ class gerencia extends CI_Controller
       $data = array("tecnicos" => $dados);
 
 
-     
       $this->load->view('/template/layout-base.html');
       $this->load->view('dashboard.php');
       $this->load->view('gerenciar_view_id', $data);

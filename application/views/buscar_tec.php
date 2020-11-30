@@ -121,7 +121,7 @@
                   <img src="../../assets/images/icons/<?php echo $estrela5; ?>" id="s5"></label>
                 <!--   <p id="rating" name="rating"><?php/* echo $t['avaliacao']; */?></p> !-->
                 <br><br>
-                <button type="button" class="btn  btn-sm" style="background-color:CornflowerBlue; "><a href="/chamados/nova_solicitacao?id=<?php echo $t["id_tec"]; ?>" style="color:black">Solicitar Tecnico</a></button>
+                <button type="button" class="btn  btn-sm" style="background-color:CornflowerBlue; "><a href="/chamados/nova_solicitacao?id=<?php echo $t["id_tec"]; ?>" style="color:#1C1C1C;"><label>Solicitar Tecnico</label></a></button>
 
                 <br><br>
               </div>
@@ -219,7 +219,7 @@
                     <img src="../../assets/images/icons/<?php echo $estrela5; ?>" id="s5"></label>
                   <!--   <p id="rating" name="rating"><?php/* echo $t['avaliacao']; */?></p> !-->
                   <br><br>
-                  <button type="button" class="btn  btn-sm" style="background-color:CornflowerBlue; "><a href="/chamados/nova_solicitacao?id=<?php echo $t["id_tec"]; ?>" style="color:black">Solicitar Tecnico</a></button>
+                  <button type="button" class="btn  btn-sm" style="background-color:CornflowerBlue; "><a href="/chamados/nova_solicitacao?id=<?php echo $t["id_tec"]; ?>" style="color:#1C1C1C;"><label>Solicitar Tecnico</label></a></button>
 
                   <br><br>
                 </div>

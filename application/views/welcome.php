@@ -16,7 +16,7 @@
 			<div class="wrap-login100 p-t-90 p-b-30">
 				<form METHOD="POST" class="login100-form validate-form" action="/login/logar">
 					<span class="login100-form-title p-b-40">
-						QuestTi
+						<label>QuestTi</label>
 					</span>
 					<!--
 					<div>
@@ -55,7 +55,7 @@
 					<div class="flex-col-c p-t-224">
 
 
-						<a href="../cadastro" class="txt3 bo1 hov1">
+						<a href="../cadastro" class="txt4 bo1 hov1">
 							Cadastre-se
 						</a>
 					</div>

@@ -24,7 +24,7 @@
 
             <div class="panel-body">
 
-            
+
                 <div id="piechart" style="width: 900px; height: 500px;  float:left;width:600px;"></div>
 
             </div>
@@ -61,3 +61,5 @@
         chart.draw(data, options);
     }
 </script>
+
+<?php var_dump($resultado); ?>

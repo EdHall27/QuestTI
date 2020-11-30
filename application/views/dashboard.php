@@ -167,7 +167,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../Graficos/TopTec" class="nav-link">
+                                    <a href="/Graficos/TopTec" class="nav-link">
 
                                         <h4>Acompanhamento de Técnicos</h4>
                                     </a>
@@ -189,7 +189,7 @@
 
                     <?php if ($var != "") { ?>
 
-                        <li><a href="../HistoricoPag">
+                        <li><a href="/HistoricoPag">
 
                                 <h4>
                                     <?php echo $var; ?>

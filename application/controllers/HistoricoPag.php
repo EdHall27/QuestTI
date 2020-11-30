@@ -100,10 +100,15 @@ class HistoricoPag extends CI_Controller
 
 
 
-            $this->load->view('dashboard.php');
+
             $this->load->view('/template/layout-base.html');
+            $this->load->view('dashboard.php');
             $this->load->view('/HistoricoPag/index.php', $data);
-            $this->load->view('/template/roda-pe-base.html');
+
+            if($data['resultado']!= null){
+                $this->load->view('/template/roda-pe-base.html');
+            }
+
         } else {
             $this->load->view('/template/layout-base.html');
             $this->load->view('welcome.html');

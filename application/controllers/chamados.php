@@ -318,7 +318,12 @@ class chamados extends CI_Controller
       $this->load->view('/template/layout-base.html');
       $this->load->view('dashboard.php');
       $this->load->view('/chamados/ver_solicitacao.php', $data);
-      $this->load->view('/template/roda-pe-base.html');
+
+
+      var_dump($data);
+      if ($data["chamado_aberto"] != null && $data["chamado_andamento"] != null && $data["chamado_finalizado"] != null && $data["Emavaliacao"] != null && $data["AguardPagamento"] && $data["cancelado"] != null) {
+        $this->load->view('/template/roda-pe-base.html');
+      }
     }
   }
 
@@ -566,10 +571,20 @@ class chamados extends CI_Controller
         // calculando a media para atualizar a media do tecnico
         $media = floor($total / $contar);
 
+        
+        //verifica se a media e maior que 5 ou menor que 0
+        if ($media > 5) {
+          $media = 5;
+        } elseif ($media < 0) {
+          $media = 1;
+        }
+
         $data3 = array("avaliacao" => $media);
 
         $pesquisa = $this->Tecnico->UpdateAvaliacao($data3, $ContaSessaoTec['email']);
-        
+
+
+        $para = $ContaSessaoTec['email'];
       } else if ($_GET['status'] == 3) {
 
         $this->load->model('Contac');
@@ -602,16 +617,20 @@ class chamados extends CI_Controller
 
 
         // conta depositante
-        if ($total > $ContaSessaoCli[0]['saldo']) {
-          echo "valor maior do que o disponível em conta";
-          $subtotalC = 0;
-          $subtotalTec = 0;
+        // verifica se o tecnico tem conta
+        if ($ContaSessaoTec && $ContaSessaoCli) {
+          if ($total > $ContaSessaoCli[0]['saldo']) {
+            echo "valor maior do que o disponível em conta";
+            $subtotalC = 0;
+            $subtotalTec = 0;
+          } else {
+            $subtotalC = $ContaSessaoCli[0]['saldo'] - $total;
+            $subtotalTec = $ContaSessaoTec[0]['saldo'] + $total;
+          }
         } else {
-          $subtotalC = $ContaSessaoCli[0]['saldo'] - $total;
-          $subtotalTec = $ContaSessaoTec[0]['saldo'] + $total;
+          header("Location: solicitacao_comp?id=" . @$id . "&message=erroconta");
+          exit;
         }
-
-
 
 
         if ($subtotalC != 0 && $subtotalTec != 0) {
@@ -659,7 +678,7 @@ class chamados extends CI_Controller
       exit;
     }
 
-    
+
 
     $data = array(
       "status" => $novo_status,
@@ -720,7 +739,6 @@ class chamados extends CI_Controller
       header("Location: solicitacao_comp?id=" . @$id . "&message=sts_err");
       exit;
     }
-    
   }
 
 

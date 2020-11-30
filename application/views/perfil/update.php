@@ -136,18 +136,21 @@
 									</div>
 									<input hidden id="senha_antiga" name="senha_antiga" class="form-control" type="text" value="<?php echo $senha; ?>">
 								</div>
-								<div class="container-login100-form-btn">
-									<button type="submit" class="login100-form-btn">
-										Salvar
-									</button>
-								</div>
-
 							</div>
 
-					</form>
+
+							<div class="container-login100-form-btn">
+								<button type="submit" class="login100-form-btn">
+									Salvar
+								</button>
+							</div>
+
 				</div>
+
+				</form>
 			</div>
 		</div>
+	</div>
 	</div>
 
 

@@ -314,7 +314,7 @@
                       <p>
                         <h5>Adicione a Obervação!</h5>
                       </p>
-                      <input type="text" value="" name="obs" id="obs" class="form-control"> 
+                      <input type="text" value="" name="obs" id="obs" class="form-control">
                     </div>
                     <div class="modal-footer">
 
@@ -766,6 +766,21 @@
                 });
               </script>
             <?php } ?>
+
+
+            <?php if ($mensagem == "erroconta") { ?>
+              <script>
+                $(document).ready(function() {
+
+                  swal(" Erro na Conta Corrente!", "Foi identificado um erro na conta corrente e o valor não foi possível ser depositado! ", "error", {
+                    confirmButtonText: "ok",
+                  }).then(function() {
+                    window.location.href = "#";
+                  });
+                });
+              </script>
+            <?php } ?>
+
 
 
 

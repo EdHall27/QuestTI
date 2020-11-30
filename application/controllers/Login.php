@@ -93,10 +93,10 @@ class Login extends CI_Controller
           $this->load->model('Log');
 
           // numero de cadastros total
-          $cadastrostec = $this->Log->PesquisaLog("cadastro", 1, "tecnico");
+          $cadastrostec = $this->Log->PesquisaLog("cadastro", 3, "tecnico");
           $cadastrostecc  = $this->Log->CompilaDados($cadastrostec);
 
-          $cliente_cli = $this->Log->PesquisaLog("cadastro", 1, "cliente_cli");
+          $cliente_cli = $this->Log->PesquisaLog("cadastro", 3, "cliente_cli");
           $cliente_clic = $this->Log->CompilaDados($cliente_cli);
 
 
@@ -104,17 +104,17 @@ class Login extends CI_Controller
           $totalcadastros = $cadastrostecc + $cliente_clic;
 
           //usuarios liberados 
-          $tecnicolib = $this->Log->PesquisaLog("LiberadoAcesso", 1, "tecnico");
+          $tecnicolib = $this->Log->PesquisaLog("LiberadoAcesso", 3, "tecnico");
           $tecnicolibc = $this->Log->CompilaDados($tecnicolib);
 
           //usuarios bloqueados
 
-          $tecnicoblock = $this->Log->PesquisaLog("BloqueadoAcesso", 1, "tecnico");
+          $tecnicoblock = $this->Log->PesquisaLog("BloqueadoAcesso", 3, "tecnico");
           $tecnicoblockc = $this->Log->CompilaDados($tecnicoblock);
 
           //usuarios excluido
 
-          $tecexc = $this->Log->PesquisaLog("exlusão", 1, "tecnico");
+          $tecexc = $this->Log->PesquisaLog("exlusão", 3, "tecnico");
           $tecexcc = $this->Log->CompilaDados($tecexc);
 
 
@@ -127,10 +127,13 @@ class Login extends CI_Controller
             "TecnicosExcluidos" => $tecexcc,
           );
 
+   
+          
           $this->load->view('/template/layout-base.html');
           $this->load->view('dashboard.php');
           $this->load->view('/grafico/grafico_admin.php', $dados);
           $this->load->view('/template/roda-pe-base.html');
+          
         } elseif ($entidade == "cliente_cli") {
 
 
@@ -179,7 +182,7 @@ class Login extends CI_Controller
           $this->load->view('/template/layout-base.html');
 
 
-     
+
           $this->load->view('dashboard.php'); //menu
           $data = array("tecnicos" => $dados);
           $this->load->view('buscar_tec.php', $data);
