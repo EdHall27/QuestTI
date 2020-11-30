@@ -98,9 +98,9 @@ class HistObs extends CI_Controller
 
             if ($retorno) {
 
-                header("Location: /chamados/solicitacao_comp?id=" . $_POST['idChamado'] . "&acao=editobs&mostradiv=true &idobs=" . $_POST['id_obs'] . "&message=OBSedit");
+                header("Location: /chamados/solicitacao_comp?id=" . $_POST['idChamado'] . "&mostradiv=true&message=OBSedit");
             }else{
-                header("Location: /chamados/solicitacao_comp?id=" . $_POST['idChamado'] . "&acao=editobs&mostradiv=true &idobs=" . $_POST['id_obs'] . "&message=OBSerredit");
+                header("Location: /chamados/solicitacao_comp?id=" . $_POST['idChamado'] . "&mostradiv=true&message=Erroredit");
             }
         } else {
 

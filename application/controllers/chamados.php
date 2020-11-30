@@ -79,94 +79,7 @@ class chamados extends CI_Controller
     $retorno = $this->Chamado->Avaliar($data, $id_chamado);
 
     if ($retorno) {
-
-      // definindo insert de log
-      $this->load->model('Movimentacao');
-      $id_mov = $this->Movimentacao->BuscabyName("movimentacao", "Stsavaliado");
-
-      $timezone = new DateTimeZone('America/Sao_Paulo');
-      $data = new DateTime('now', $timezone);
-      $data = $data->format('Y/m/d H:i');
-
-
-      $tec = array(
-        "cpf_tec" => $_POST['cpf_tec'],
-      );
-
-
-      $this->load->model('Tecnico');
-      $Tecnico = (array) $this->Tecnico->buscar_cpf($tec, "tecnico");
-
-
-
-      $log = array(
-        "id_tb" => $id_chamado,
-        "NomeEntidade" => "chamado",
-        "TipoMov" => $id_mov[0]['id'],
-        "data_mod" => $data,
-        "responsavel" => $_SESSION['email'],
-        "quantidade" => $_POST['ratinginput'],
-        "para" => $Tecnico['email'],
-      );
-
-      $this->load->model('Log');
-      $this->Log->setLog($log);
-      $this->Log->inserirLog('logs');
-
-      // fim insert de log
-
-
-
-      // contando quantas avaliações foram feitas
-      // para o tecnico selecionado
-      // com o id 11 que é avaliação 
-
-
-      $this->load->model('Log');
-      $retorno = $this->Log->PesqStatus($Tecnico['email'], 11);
-      $dadoscompilados = $this->Log->CompilaDados($retorno);
-
-
-      // comando avaliações totais para fazer a media de avaliacao
-
-      $media = 0;
-      foreach ($retorno as $value) {
-
-        if ($value['quantidade'] != null) {
-          $media =  $media + $value['quantidade'];
-        }
-      }
-
-
-      //fazendo a media
-      if ($media != 0) {
-        $media_total = $media / $dadoscompilados;
-
-
-
-        // formatando para inteiro 
-
-        $media_int = floor($media_total);
-      } else {
-        $media_int = 0;
-      }
-
-
-
-
-      $data = array(
-        "avaliacao" => $media_int,
-      );
-
-
-      $this->load->model('Tecnico');
-      $retorno = $this->Tecnico->UpdateAvaliacao($data, $Tecnico['email']);
-
-
-
-
-
-      header("Location: solicitacao_muda_status?id=" . $id_chamado . "&status=2");
+      header("Location: solicitacao_muda_status?id=" . $id_chamado . "&status=2"."&valor=".$_POST['ratinginput']);
     } else {
       echo "erro ao avaliar";
     }
@@ -320,7 +233,7 @@ class chamados extends CI_Controller
       $this->load->view('/chamados/ver_solicitacao.php', $data);
 
 
-      var_dump($data);
+
       if ($data["chamado_aberto"] != null && $data["chamado_andamento"] != null && $data["chamado_finalizado"] != null && $data["Emavaliacao"] != null && $data["AguardPagamento"] && $data["cancelado"] != null) {
         $this->load->view('/template/roda-pe-base.html');
       }
@@ -524,9 +437,7 @@ class chamados extends CI_Controller
         $acao_tb = "StsFimTec";
         $total = 0;
       } else if ($_GET['status'] == 2) {
-        $novo_status = 3;
-        $acao_tb = "Stsavaliado";
-        $total = 0;
+
 
 
 
@@ -571,7 +482,7 @@ class chamados extends CI_Controller
         // calculando a media para atualizar a media do tecnico
         $media = floor($total / $contar);
 
-        
+
         //verifica se a media e maior que 5 ou menor que 0
         if ($media > 5) {
           $media = 5;
@@ -585,6 +496,18 @@ class chamados extends CI_Controller
 
 
         $para = $ContaSessaoTec['email'];
+
+
+        $novo_status = 3;
+        $acao_tb = "Stsavaliado";
+
+        if(isset($_GET['valor'])){
+          $total = $_GET['valor'];
+        }else{
+          $total = 0;
+        }
+
+        
       } else if ($_GET['status'] == 3) {
 
         $this->load->model('Contac');
@@ -673,75 +596,112 @@ class chamados extends CI_Controller
       } else if ($_GET['status'] == 5) {
         $novo_status = 5;
         $acao_tb = "Stscancelado";
+      } else {
+        exit;
       }
-    } else {
-      exit;
-    }
 
 
 
-    $data = array(
-      "status" => $novo_status,
-      "id_chamado" => $id,
-    );
-
-    $this->load->model('Chamado');
-    $retorno = $this->Chamado->updateChamadoId($data, "chamado");
-
-    //retorna ao metodo inicial
-    if ($retorno) {
-
-
-      // definindo insert de log
-      $this->load->model('Movimentacao');
-      $id_mov = $this->Movimentacao->BuscabyName("movimentacao", $acao_tb);
-
-      $timezone = new DateTimeZone('America/Sao_Paulo');
-      $data = new DateTime('now', $timezone);
-      $data = $data->format('Y/m/d H:i');
-
-      $log = array(
-        "id_tb" => $id,
-        "NomeEntidade" => "chamado",
-        "TipoMov" => $id_mov[0]['id'],
-        "data_mod" => $data,
-        "responsavel" => $_SESSION['email'],
-        "para" => $para,
-        "quantidade" => @$total,
+      $data = array(
+        "status" => $novo_status,
+        "id_chamado" => $id,
       );
 
-      $this->load->model('Log');
-      $this->Log->setLog($log);
-      $result = $this->Log->inserirLog('logs');
+      $this->load->model('Chamado');
+      $retorno = $this->Chamado->updateChamadoId($data, "chamado");
 
-      // fim insert de log
+      //retorna ao metodo inicial
+      if ($retorno) {
+
+
+        // definindo insert de log
+        $this->load->model('Movimentacao');
+        $id_mov = $this->Movimentacao->BuscabyName("movimentacao", $acao_tb);
+
+        $timezone = new DateTimeZone('America/Sao_Paulo');
+        $data = new DateTime('now', $timezone);
+        $data = $data->format('Y/m/d H:i');
+
+        $log = array(
+          "id_tb" => $id,
+          "NomeEntidade" => "chamado",
+          "TipoMov" => $id_mov[0]['id'],
+          "data_mod" => $data,
+          "responsavel" => $_SESSION['email'],
+          "para" => $para,
+          "quantidade" => @$total,
+        );
 
 
 
-      if ($novo_status == 4 || $mensagempag != null) {
-        if ($mensagempag   == "pago") {
-          header("Location: solicitacao_comp?id=" . @$id . "&message=pago");
-          exit;
-        } elseif ($mensagempag   == "erropagamento") {
 
-          header("Location: solicitacao_comp?id=" . @$id . "&message=valoracima");
-          exit;
+
+        // aqui insere duas logs caso o status seja igual a pago 
+        // pois logo depois de pagar vai direto para finalizado
+
+
+        if ($acao_tb == "Stspago") {
+
+          $acao_tb2 = "Stsfinalizado";
+
+          $id_mov2 = $this->Movimentacao->BuscabyName("movimentacao", $acao_tb2);
+
+          $log2 = array(
+            "id_tb" => $id,
+            "NomeEntidade" => "chamado",
+            "TipoMov" => $id_mov2[0]['id'],
+            "data_mod" => $data,
+            "responsavel" => $_SESSION['email'],
+            "para" => $para,
+            "quantidade" => 0,
+          );
+
+
+
+
+          $this->load->model('Log');
+          $this->Log->setLog($log);
+          $result = $this->Log->inserirLog('logs');
+
+
+          $this->load->model('Log');
+          $this->Log->setLog($log2);
+          $result2 = $this->Log->inserirLog('logs');
+        } else {
+          $this->load->model('Log');
+          $this->Log->setLog($log);
+          $result = $this->Log->inserirLog('logs');
+        }
+
+
+
+        // fim insert de log
+
+
+
+        if ($novo_status == 4 || $mensagempag != null) {
+          if ($mensagempag   == "pago") {
+            header("Location: solicitacao_comp?id=" . @$id . "&message=pago");
+            exit;
+          } elseif ($mensagempag   == "erropagamento") {
+
+            header("Location: solicitacao_comp?id=" . @$id . "&message=valoracima");
+            exit;
+          }
+        } else {
+          header("Location: solicitacao_comp?id=" . @$id . "&message=sts_ok");
+        }
+
+
+        if ($novo_status == 4) {
+          header("Location: solicitacao_comp?id=" . @$id . "&message=err_finalizar");
         }
       } else {
-        header("Location: solicitacao_comp?id=" . @$id . "&message=sts_ok");
+        header("Location: solicitacao_comp?id=" . @$id . "&message=sts_err");
+        exit;
       }
-
-
-      if ($novo_status == 4) {
-        header("Location: solicitacao_comp?id=" . @$id . "&message=err_finalizar");
-      }
-    } else {
-      header("Location: solicitacao_comp?id=" . @$id . "&message=sts_err");
-      exit;
     }
   }
-
-
 
 
 

@@ -571,10 +571,10 @@
                       $color1 = "";
                     }
 
-
+                    $novadata = date('d/m/Y H:i', strtotime($value["data"]));
                   ?>
 
-                    <td><input name="data" id="data" readonly value="<?php echo $value['data'] ?>"></td>
+                    <td><input name="data" id="data" readonly value="<?php echo $novadata ?>"></td>
                     <td><input <?php echo $color1;  ?> name="obs" id="obs" <?php echo $liberacaoobs; ?> value="<?php echo $value['obs']; ?> "> </input></td>
 
                     <input hidden value="<?php echo $value['id'] ?>" id="id_obs" name="id_obs"></input>
@@ -773,6 +773,48 @@
                 $(document).ready(function() {
 
                   swal(" Erro na Conta Corrente!", "Foi identificado um erro na conta corrente e o valor não foi possível ser depositado! ", "error", {
+                    confirmButtonText: "ok",
+                  }).then(function() {
+                    window.location.href = "#";
+                  });
+                });
+              </script>
+            <?php } ?>
+
+
+            <?php if ($mensagem == "OBSedit") { ?>
+              <script>
+                $(document).ready(function() {
+
+                  swal("Observação editada!", "A observação foi editada com sucesso!", "success", {
+                    confirmButtonText: "OK",
+                  }).then(function() {
+                    window.location.href = "#";
+                  });
+                });
+              </script>
+            <?php } ?>
+
+
+            <?php if ($mensagem == "Erroredit") { ?>
+              <script>
+                $(document).ready(function() {
+
+                  swal(" Erro ao editar observação!", "Não foi possível editar  a observação! ", "error", {
+                    confirmButtonText: "ok",
+                  }).then(function() {
+                    window.location.href = "#";
+                  });
+                });
+              </script>
+            <?php } ?>
+
+
+            <?php if ($mensagem == "ErroPermissao") { ?>
+              <script>
+                $(document).ready(function() {
+
+                  swal("Erro de permissão!", "Não é possível editar observações que não foram adicionadas por você! ", "error", {
                     confirmButtonText: "ok",
                   }).then(function() {
                     window.location.href = "#";

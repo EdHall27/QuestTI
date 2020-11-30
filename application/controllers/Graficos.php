@@ -52,7 +52,7 @@ class Graficos extends CI_Controller
         $this->load->model('Log');
 
         // conta 
-        $array = $this->Log->PesquisaLog("cadastro", 2, "chamado");
+        $array = $this->Log->PesquisaLog("StsFimTec", 2, "chamado");
 
         // contando por tecnico
 
@@ -63,6 +63,7 @@ class Graficos extends CI_Controller
         $data = array(
             "resultado"    =>  $result,
         );
+
 
         $this->load->view('/template/layout-base.html');
         $this->load->view('dashboard.php');
