@@ -341,8 +341,10 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="inputEmail4">Cpf Tecnico</label>
-                  <input readonly <?php echo $acao1; ?> value="<?php echo $t["cpf_tecnico"]; ?>" id="cpf_tec" name="cpf_tec" type="text" class="form-control" id="inputEmail4">
+                  <label for="inputEmail4"><?php if($_SESSION['tipo_user'] == 1){echo "Técnico";} elseif($_SESSION['tipo_user'] == 2){ echo "Solicitante";}
+                   ?></label>
+                  <input readonly <?php echo $acao1; ?> value="<?php if($_SESSION['tipo_user'] == 1){echo $t["nome_tec"];} elseif($_SESSION['tipo_user'] == 2){echo $t["nome_cli"];}
+                   ?>" id="cpf_tec" name="cpf_tec" type="text" class="form-control" id="inputEmail4">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Assunto</label>

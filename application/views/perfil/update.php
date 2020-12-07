@@ -40,9 +40,37 @@
 				<div class="panel-body">
 
 					<form id="edit_cadastro" method="POST" action="altera">
+						<!--
+						<div class="form-group col-md-13 border-bottom">
+							<div class="">
+								<div class="">
+									<div class="">
+										<img class="border border-white rounded-circle" src="/assets/images/tec/tec2.jpg" height="120" width="120" />
+									</div>
+									<label for="inputPassword4">Alterar Foto</label>
+
+									<div class="input-group col-md-6">
+
+
+										<div class="input-group-prepend">
+										</div>
+										<input id="foto" name=foto type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+										<label class="custom-file-label " for="inputGroupFile01">Selecionar Arquivo</label>
+										<br><br>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<br>
+-->
+
 						<input value="<?php echo $tipo_user; ?>" name="tipo_user" type="number" hidden>
 						<input value="<?php echo $id_d; ?>" name="id" type="number" hidden>
 						<?php if ($tipo_user == 2) { ?>
+
+
+
 							<div id="div_tec" style="visibility">
 								<div class="form-group">
 									<label for="inputState">Área de Atuação</label>
@@ -65,91 +93,94 @@
 										<option>Outros</option>
 									</select>
 								</div>
-								<br>
-							<?php } ?>
+							</div>
+							<br>
+						<?php } ?>
+
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">Nome</label>
+								<input value="<?php echo $nome; ?>" name="nome" type="text" class="form-control" id="nome" placeholder="Nome completo">
+							</div>
+
+							<div class="form-group col-md-6">
+								<label for="inputEmail4">Email</label>
+								<input value="<?php echo $email; ?>" name="email" type="email" class="form-control" id="email" placeholder="Email">
+							</div>
+
+						</div>
+						<?php if ($tipo_user != 0) { ?>
+							<div class="form-group" hidden>
+								<label for="inputAddress">Cpf</label>
+								<input value="<?php echo $identificador; ?>" id="cpf" name="cpf" type="text" class="form-control" id="inputAddress" placeholder="Ex:104.456.333-71">
+							</div>
+						<?php } else { ?>
+							<div class="form-group" hidden>
+								<label for="inputAddress">Cnpj</label>
+								<input value="<?php echo $identificador; ?>" id="cpf" name="cpf" type="text" class="form-control" id="inputAddress" placeholder="Ex: 16.189.379/0003-04">
+							</div>
+						<?php } ?>
+
+						<div class="form-group">
+							<label for="inputAddress">Endereço</label>
+							<input value="<?php echo $endereco; ?>" name="endereco" type="text" class="form-control" id="endereco" placeholder="Ex:Rua das Rosas 425">
+						</div>
+
+						<?php if ($tipo_user != 0) { ?>
+							<div class="form-group">
+								<label for="inputAddress">Cep</label>
+								<input value="<?php echo $cep; ?>" id="cep" name="cep" type="text" class="form-control" id="inputAddress" placeholder="Ex:83070-611">
+							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label for="inputPassword4">Nome</label>
-									<input value="<?php echo $nome; ?>" name="nome" type="text" class="form-control" id="nome" placeholder="Nome completo">
+									<label for="inputEmail4">Telefone</label>
+									<input value="<?php echo $telefone; ?>" id="tel" name="tel" type="text" class="form-control" id="inputEmail4" placeholder="Ex:41-3333-3706">
 								</div>
-
 								<div class="form-group col-md-6">
-									<label for="inputEmail4">Email</label>
-									<input value="<?php echo $email; ?>" name="email" type="email" class="form-control" id="email" placeholder="Email">
+									<label for="inputPassword4">Celular</label>
+									<input id="cel" value="<?php echo $celular; ?>" name="cel" type="text" class="form-control" id="cel" placeholder="Ex:41-9687-4054">
 								</div>
 
-							</div>
-							<?php if ($tipo_user != 0) { ?>
-								<div class="form-group" hidden>
-									<label for="inputAddress">Cpf</label>
-									<input value="<?php echo $identificador; ?>" id="cpf" name="cpf" type="text" class="form-control" id="inputAddress" placeholder="Ex:104.456.333-71">
-								</div>
-							<?php } else { ?>
-								<div class="form-group" hidden>
-									<label for="inputAddress">Cnpj</label>
-									<input value="<?php echo $identificador; ?>" id="cpf" name="cpf" type="text" class="form-control" id="inputAddress" placeholder="Ex: 16.189.379/0003-04">
-								</div>
+
+
+
+
 							<?php } ?>
-
-							<div class="form-group">
-								<label for="inputAddress">Endereço</label>
-								<input value="<?php echo $endereco; ?>" name="endereco" type="text" class="form-control" id="endereco" placeholder="Ex:Rua das Rosas 425">
-							</div>
-
-							<?php if ($tipo_user != 0) { ?>
-								<div class="form-group">
-									<label for="inputAddress">Cep</label>
-									<input value="<?php echo $cep; ?>" id="cep" name="cep" type="text" class="form-control" id="inputAddress" placeholder="Ex:83070-611">
-								</div>
-								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label for="inputEmail4">Telefone</label>
-										<input value="<?php echo $telefone; ?>" id="tel" name="tel" type="text" class="form-control" id="inputEmail4" placeholder="Ex:41-3333-3706">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="inputPassword4">Celular</label>
-										<input id="cel" value="<?php echo $celular; ?>" name="cel" type="text" class="form-control" id="cel" placeholder="Ex:41-9687-4054">
-									</div>
-
-
-
-
-
-								<?php } ?>
-								</div>
-
-
-								<div class=" form-group ">
-									<label for="inputPassword4">Alterar Senha</label>
-									<input type='checkbox' id="escolha" name="escolha" value="true" />
-								</div>
-
-								<div class="form-group ">
-									<div style="display:none" id="confirmacao">
-										<label>Senha</label>
-										<input id="senha" name="senha" class="form-control" type="password">
-										<br>
-										<label>Confirmar Senha</label>
-										<input id="senha2" name="senha2" class="form-control" type="password">
-
-
-									</div>
-									<input hidden id="senha_antiga" name="senha_antiga" class="form-control" type="text" value="<?php echo $senha; ?>">
-								</div>
 							</div>
 
 
-							<div class="container-login100-form-btn">
-								<button type="submit" class="login100-form-btn">
-									Salvar
-								</button>
+							<div class=" form-group ">
+								<label for="inputPassword4">Alterar Senha</label>
+								<input type='checkbox' id="escolha" name="escolha" value="true" />
 							</div>
 
+							<div class="form-group ">
+								<div style="display:none" id="confirmacao">
+									<label>Senha</label>
+									<input id="senha" name="senha" class="form-control" type="password">
+									<br>
+									<label>Confirmar Senha</label>
+									<input id="senha2" name="senha2" class="form-control" type="password">
+
+
+								</div>
+								<input hidden id="senha_antiga" name="senha_antiga" class="form-control" type="text" value="<?php echo $senha; ?>">
+							</div>
 				</div>
 
-				</form>
+
+				<div class="container-login100-form-btn">
+					<button type="submit" class="login100-form-btn">
+						Salvar
+					</button>
+				</div>
+
 			</div>
+
+			</form>
 		</div>
+	</div>
 	</div>
 	</div>
 

@@ -79,7 +79,7 @@ class chamados extends CI_Controller
     $retorno = $this->Chamado->Avaliar($data, $id_chamado);
 
     if ($retorno) {
-      header("Location: solicitacao_muda_status?id=" . $id_chamado . "&status=2"."&valor=".$_POST['ratinginput']);
+      header("Location: solicitacao_muda_status?id=" . $id_chamado . "&status=2" . "&valor=" . $_POST['ratinginput']);
     } else {
       echo "erro ao avaliar";
     }
@@ -259,6 +259,31 @@ class chamados extends CI_Controller
     $retorno = $this->Chamado->ChamadoId($data);
 
 
+    
+
+
+    if ($_SESSION['tipo_user'] == 1) {
+      $data2 = array("cpf_tec" => $retorno[0]['cpf_tecnico']);
+
+
+      //transformando o cpf do tecnico no nome
+      $this->load->model('Tecnico');
+      $nometec = $this->Tecnico->buscar_cpf($data2, "tecnico");
+      $retorno[0]['nome_tec'] = $nometec->nome;
+    } elseif ($_SESSION['tipo_user'] == 2) {
+
+      $data2 = array("cpf_cli" => $retorno[0]['cpf_cliente']);
+      $this->load->model('Cliente');
+      $nometec = $this->Cliente->buscar_cpf($data2, "tecnico");
+      $retorno[0]['nome_cli'] = $nometec->nome;
+    }
+
+
+
+
+
+    
+
     // acessando os historicos do chamado
 
     $this->load->model('ObsChamado');
@@ -276,6 +301,7 @@ class chamados extends CI_Controller
     $this->load->view('dashboard.php');
     $this->load->view('/chamados/chamado_id.php', $data);
     $this->load->view('/template/roda-pe-base.html');
+    
   }
 
 
@@ -501,13 +527,11 @@ class chamados extends CI_Controller
         $novo_status = 3;
         $acao_tb = "Stsavaliado";
 
-        if(isset($_GET['valor'])){
+        if (isset($_GET['valor'])) {
           $total = $_GET['valor'];
-        }else{
+        } else {
           $total = 0;
         }
-
-        
       } else if ($_GET['status'] == 3) {
 
         $this->load->model('Contac');

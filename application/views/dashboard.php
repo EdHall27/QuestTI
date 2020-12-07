@@ -26,11 +26,20 @@
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+
+
+                
+                    
+   
+
                 </li>
+
         </nav>
         <!-- /.navbar -->
 
@@ -45,8 +54,15 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
+
+
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+
+
+
+
+                        </li>
 
                         <li class="nav-item">
 
@@ -217,9 +233,18 @@
                 </nav>
                 <!-- /.sidebar-menu -->
 
-
+             
+             
             </div>
+
+
             <!-- /.sidebar -->
+
+
+     
+                
+
+
 
             <li><a href="/perfil/mostra_termo">
                     <h4>

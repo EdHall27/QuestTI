@@ -72,7 +72,7 @@
 
                                         <th scope="col"><?php echo $novadata; ?></th>
                                         <th scope="col">
-                                            <?php echo $t["para"]; ?></th>
+                                            <?php if($_SESSION['tipo_user']==1){echo $t["para"];}elseif($_SESSION['tipo_user']==2){echo $t["responsavel"];} ?></th>
                                         <th scope="col" style='text-align:center;'><?php echo $t["quantidade"]; ?>
                                     </tbody>
                                 <?php } ?>

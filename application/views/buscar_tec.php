@@ -33,7 +33,11 @@
 
 
     <?php
+
+
     if ($tecselect == "todos") {
+
+      $i = 1;
       foreach ($tecnicos as $t) {
 
 
@@ -44,7 +48,7 @@
         <div class="col-md-4">
           <div class="card border border-dark ">
             <div class="" style="background-color:CornflowerBlue">
-              <img class="border border-white rounded-circle" style="background-color:	white" src="/assets/images/tec/tec.png" height="100" width="100" />
+              <img class="border border-white rounded-circle" style="background-color:	white" src="/assets/images/tec/tec<?php echo $i; ?>.jpg" height="100" width="100" />
             </div>
             <div class="card-inner">
               <div class="header">
@@ -121,7 +125,7 @@
                   <img src="../../assets/images/icons/<?php echo $estrela5; ?>" id="s5"></label>
                 <!--   <p id="rating" name="rating"><?php/* echo $t['avaliacao']; */?></p> !-->
                 <br><br>
-                <button type="button" class="btn  btn-sm" style="background-color:CornflowerBlue; "><a href="/chamados/nova_solicitacao?id=<?php echo $t["id_tec"]; ?>" style="color:#1C1C1C;"><label>Solicitar Tecnico</label></a></button>
+                <button type="button" class="btn  btn-sm" style="background-color:CornflowerBlue; "><a href="/chamados/nova_solicitacao?id=<?php echo $t["id_tec"]; ?>" style="color:#1C1C1C;">Solicitar Tecnico</a></button>
 
                 <br><br>
               </div>
@@ -129,8 +133,14 @@
           </div>
           <br>
         </div>
-      <?php }
-    } elseif ($tecselect == "favoritos") { ?>
+      <?php
+
+        $i = $i + 1;
+      }
+    } elseif ($tecselect == "favoritos") {
+
+      $i2 = 1;
+      ?>
 
       <?php foreach ($favoritos as $t) {
 
@@ -142,7 +152,7 @@
           <div class="col-md-4">
             <div class="card border border-dark ">
               <div class="" style="background-color:CornflowerBlue">
-                <img class="border border-white rounded-circle" style="background-color:	white" src="/assets/images/tec/tec.png" height="100" width="100" />
+                <img class="border border-white rounded-circle" style="background-color:	white" src="/assets/images/tec/tec<?php echo $i2; ?>.jpg" height="100" width="100" />
               </div>
               <div class="card-inner">
                 <div class="header">
@@ -219,7 +229,7 @@
                     <img src="../../assets/images/icons/<?php echo $estrela5; ?>" id="s5"></label>
                   <!--   <p id="rating" name="rating"><?php/* echo $t['avaliacao']; */?></p> !-->
                   <br><br>
-                  <button type="button" class="btn  btn-sm" style="background-color:CornflowerBlue; "><a href="/chamados/nova_solicitacao?id=<?php echo $t["id_tec"]; ?>" style="color:#1C1C1C;"><label>Solicitar Tecnico</label></a></button>
+                  <button type="button" class="btn  btn-sm" style="background-color:CornflowerBlue; "><a href="/chamados/nova_solicitacao?id=<?php echo $t["id_tec"]; ?>" style="color:#1C1C1C;">Solicitar Tecnico</a></button>
 
                   <br><br>
                 </div>
@@ -228,7 +238,13 @@
             <br>
           </div>
       <?php }
-      } ?>
+
+        $i2 = $i2 + 1;
+      }
+
+
+
+      ?>
 
 
 
